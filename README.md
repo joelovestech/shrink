@@ -1,4 +1,4 @@
-# 🔍 Shrink — Multimodal Context Optimizer for AI Agents
+# 🦐 Shrink — Multimodal Context Optimizer for AI Agents
 
 **The first tool to solve image context bloat in AI agents.** Every other context compression tool skips images. Shrink doesn't.
 
