@@ -227,11 +227,13 @@ python3 shrink.py --session-file path/to/session.jsonl
 
 | Context Depth | One-time Cost/Image | Savings Per Turn | ROI Breakeven |
 |---|---|---|---|
-| 3 msgs | ~1,600 tokens | ~14,750 tokens | 0.11 turns |
-| 5 msgs (default) | ~1,700 tokens | ~14,750 tokens | 0.12 turns |
-| 10 msgs | ~1,950 tokens | ~14,750 tokens | 0.13 turns |
+| 3 msgs | ~1,600 tokens | ~16,500 tokens | 0.10 turns |
+| 5 msgs | ~1,700 tokens | ~16,500 tokens | 0.10 turns |
+| 10 msgs (default) | ~1,950 tokens | ~16,500 tokens | 0.12 turns |
 
-**Translation:** Spend ~1,700 tokens once → save ~14,750 tokens every turn, forever. Pays for itself before the first response completes.
+Based on production averages: ~17,000 tokens/image in, ~500 tokens/description out (full three-tier).
+
+**Translation:** Spend ~1,950 tokens once → save ~16,500 tokens every turn, forever. Pays for itself before the first response completes.
 
 ---
 
