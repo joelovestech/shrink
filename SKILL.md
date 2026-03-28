@@ -89,7 +89,7 @@ Report the full summary stats when complete.
 
 ### Step 2b: Apply Changes
 
-After deflation completes, inform the user that changes are saved to disk but agents
+After shrinking completes, inform the user that changes are saved to disk but agents
 still hold old context in memory. Offer to apply immediately:
 
 ```

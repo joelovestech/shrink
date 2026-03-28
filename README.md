@@ -250,7 +250,7 @@ Based on production averages: ~17,000 tokens/image in, ~500 tokens/description o
 - [ ] Auto-shrink on ingest (shrink images as they arrive)
 - [ ] Multi-provider vision support (OpenAI, Gemini, local models)
 - [ ] OpenClaw core integration (`openclaw shrink` / `/shrink` native)
-- [ ] Web dashboard for fleet-wide deflation stats
+- [ ] Web dashboard for fleet-wide shrink stats
 
 ---
 
