@@ -1,10 +1,10 @@
-# 🔍 Deflate — Multimodal Context Optimizer for AI Agents
+# 🔍 Shrink — Multimodal Context Optimizer for AI Agents
 
-**The first tool to solve image context bloat in AI agents.** Every other context compression tool skips images. Deflate doesn't.
+**The first tool to solve image context bloat in AI agents.** Every other context compression tool skips images. Shrink doesn't.
 
-Images in your agent's session history consume 15,000–25,000+ tokens each — **every single turn**. Deflate replaces them with rich, three-tier descriptions that preserve conversational context, complete data, AND visual design details. 96-99% token reduction. Zero information loss.
+Images in your agent's session history consume 15,000–25,000+ tokens each — **every single turn**. Shrink replaces them with rich, three-tier descriptions that preserve conversational context, complete data, AND visual design details. 96-99% token reduction. Zero information loss.
 
-> *"Stop nuking your context with /compact. Deflate your images first."*
+> *"Stop nuking your context with /compact. Shrink your images first."*
 
 ---
 
@@ -22,7 +22,7 @@ Existing solutions:
 
 ---
 
-## How Deflate Works
+## How Shrink Works
 
 ```
 Raw Image (~18,000 tokens)
@@ -34,7 +34,7 @@ Three-Tier Description (~500 tokens)
 
 ### Three-Tier Extraction™
 
-Deflate doesn't just describe what an image looks like. It produces three complementary tiers that capture everything an agent could ever need to look back for:
+Shrink doesn't just describe what an image looks like. It produces three complementary tiers that capture everything an agent could ever need to look back for:
 
 **Tier 1 — CONTEXT:** *Why this image matters in the conversation*
 > SSH fingerprint verification dialog on Android, connecting to 192.168.86.194:222. User is setting up first-time SSH access from Samsung S24 phone.
@@ -55,7 +55,7 @@ The VISUAL tier is also **context-aware** — if the conversation is about butto
 
 ### vs. Raw Images (no optimization)
 
-| Metric | Raw Image | Deflate |
+| Metric | Raw Image | Shrink |
 |--------|-----------|---------|
 | Tokens per image | ~15,000-25,000 | ~400-600 |
 | Cost per turn (5 images) | ~75,000-125,000 tokens | ~2,000-3,000 tokens |
@@ -67,7 +67,7 @@ The VISUAL tier is also **context-aware** — if the conversation is about butto
 
 ### vs. /compact (text summarization)
 
-| Metric | /compact | Deflate |
+| Metric | /compact | Shrink |
 |--------|----------|---------|
 | Handles images? | ❌ Explicitly skips | ✅ Primary purpose |
 | Preserves conversation text? | ⚠️ Summarizes (lossy) | ✅ Untouched |
@@ -77,7 +77,7 @@ The VISUAL tier is also **context-aware** — if the conversation is about butto
 
 ### vs. Image Compression (resize/quality reduction)
 
-| Metric | Compress Image | Deflate |
+| Metric | Compress Image | Shrink |
 |--------|---------------|---------|
 | Token savings | ~80-90% | **98-99%** |
 | Text in images readable? | ⚠️ Degraded | ✅ Extracted as text |
@@ -94,7 +94,7 @@ The VISUAL tier is also **context-aware** — if the conversation is about butto
 | /compact | Varies | ~30-50% (summarized) | ❌ Skipped |
 | Context-only description | ~100/img | ~60% (no raw data, no visual) | ✅ |
 | Two-tier (context + data) | ~250/img | ~90% (no visual design) | ✅ |
-| **Deflate full (three-tier)** | **~500/img** | **~99% (context + data + visual)** | **✅** |
+| **Shrink full (three-tier)** | **~500/img** | **~99% (context + data + visual)** | **✅** |
 
 ---
 
@@ -125,7 +125,7 @@ Tested on a production OpenClaw fleet (10 agents):
 - 💬 **Context-Aware** — reads preceding messages + user text + agent response
 
 ### Fleet Management
-- 📊 **`--all-sessions`** — deflate every session for an agent in one command
+- 📊 **`--all-sessions`** — shrink every session for an agent in one command
 - 🎯 **`--agent <id>`** — target any agent in your fleet
 - 🔢 **`--max-images N`** — budget control, process first N only
 - 📏 **`--min-tokens N`** — skip tiny images below threshold
@@ -139,7 +139,7 @@ Tested on a production OpenClaw fleet (10 agents):
 - 🤖 **`--model`** — override vision model (auto, sonnet, haiku)
 
 ### Interactive UX (Telegram/Discord)
-- Inline button menus for scan → deflate → apply workflow
+- Inline button menus for scan → shrink → apply workflow
 - Per-agent selection with token counts
 - Options panel for model/depth/scope
 - Gateway restart option to apply changes immediately
@@ -163,22 +163,22 @@ Then in chat:
 ### CLI Usage
 ```bash
 # Preview what's in your session
-python3 deflate.py --agent main --dry-run
+python3 shrink.py --agent main --dry-run
 
-# Deflate current session
-python3 deflate.py --agent main
+# Shrink current session
+python3 shrink.py --agent main
 
-# Deflate all sessions for an agent
-python3 deflate.py --agent yancy --all-sessions
+# Shrink all sessions for an agent
+python3 shrink.py --agent yancy --all-sessions
 
 # Budget-conscious: limit images, use cheaper model
-python3 deflate.py --agent main --max-images 10 --model claude-haiku-4-5
+python3 shrink.py --agent main --max-images 10 --model claude-haiku-4-5
 
 # JSON output for automation
-python3 deflate.py --agent main --all-sessions --json
+python3 shrink.py --agent main --all-sessions --json
 
 # Specific session file
-python3 deflate.py --session-file path/to/session.jsonl
+python3 shrink.py --session-file path/to/session.jsonl
 ```
 
 ---
@@ -213,13 +213,13 @@ python3 deflate.py --session-file path/to/session.jsonl
 
 ### Design Decisions
 
-**Why describe-first, never compress-first:** Compressing images (resize/quality reduction) before describing them degrades text readability. Error messages, IP addresses, config values become unreadable. Deflate always describes from the full-quality original, then removes the image. No information loss.
+**Why describe-first, never compress-first:** Compressing images (resize/quality reduction) before describing them degrades text readability. Error messages, IP addresses, config values become unreadable. Shrink always describes from the full-quality original, then removes the image. No information loss.
 
 **Why three tiers instead of one:** Every question an agent could ask about an image falls into one of three buckets: "why was this sent?" (CONTEXT), "what was the exact value of X?" (DATA), or "what did it look like?" (VISUAL). Three-tier extraction answers all three. "We captured too much" is never the regret — "we didn't capture enough" always is. At ~500 tokens for full extraction vs ~18,000 for the raw image, the cost of completeness is a rounding error.
 
 **Why VISUAL tier is context-aware:** The VISUAL tier reads the preceding conversation to determine what visual details matter. If the discussion is about button spacing, it focuses on layout metrics. If about color scheme, it captures hex values. This prevents generic visual descriptions and ensures the extracted details are conversationally relevant.
 
-**Why auto model selection:** OAuth tokens (Claude Max/Max Pro) can only use Haiku via direct API. API keys get full Sonnet access. Deflate detects the token type and picks the best available model automatically, with seamless failover if the primary key fails.
+**Why auto model selection:** OAuth tokens (Claude Max/Max Pro) can only use Haiku via direct API. API keys get full Sonnet access. Shrink detects the token type and picks the best available model automatically, with seamless failover if the primary key fails.
 
 ---
 
@@ -245,9 +245,9 @@ python3 deflate.py --session-file path/to/session.jsonl
 - [x] Interactive button UX
 - [x] JSON output for automation
 - [x] Detail modes (`full` / `standard`)
-- [ ] Auto-deflate on ingest (deflate images as they arrive)
+- [ ] Auto-shrink on ingest (shrink images as they arrive)
 - [ ] Multi-provider vision support (OpenAI, Gemini, local models)
-- [ ] OpenClaw core integration (`openclaw deflate` / `/deflate` native)
+- [ ] OpenClaw core integration (`openclaw shrink` / `/shrink` native)
 - [ ] Web dashboard for fleet-wide deflation stats
 
 ---
@@ -282,4 +282,4 @@ MIT
 
 Issues and PRs welcome. Built by [@joelovestech1](https://x.com/joelovestech1).
 
-*Deflate is the missing piece in AI agent context management. Every framework compresses text. Nobody touches images. We do.*
+*Shrink is the missing piece in AI agent context management. Every framework compresses text. Nobody touches images. We do.*

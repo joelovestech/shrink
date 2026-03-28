@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-deflate.py — Replace base64 image blocks in OpenClaw session JSONL files
+shrink.py — Replace base64 image blocks in OpenClaw session JSONL files
 with concise text descriptions from a vision model.
 
 Images in session history can be 15,000–25,000+ tokens each as base64.
@@ -797,9 +797,9 @@ def main():
         print("❌ Must provide either --session-file or --agent", file=sys.stderr)
         print("", file=sys.stderr)
         print("Usage examples:", file=sys.stderr)
-        print("  deflate.py --session-file path/to/session.jsonl", file=sys.stderr)
-        print("  deflate.py --agent main                           # most recent session", file=sys.stderr)
-        print("  deflate.py --agent main --all-sessions            # all sessions", file=sys.stderr)
+        print("  shrink.py --session-file path/to/session.jsonl", file=sys.stderr)
+        print("  shrink.py --agent main                           # most recent session", file=sys.stderr)
+        print("  shrink.py --agent main --all-sessions            # all sessions", file=sys.stderr)
         sys.exit(1)
 
     # Shared dedup cache across all files in a run

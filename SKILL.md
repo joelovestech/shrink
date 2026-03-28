@@ -1,9 +1,9 @@
 ---
-name: deflate
+name: shrink
 description: >-
   Replace base64 images in session history with context-aware text descriptions,
-  reducing image token cost by 96-99%. Use when: (1) user says /deflate, /shrink,
-  deflate images, compress images, reduce context, image bloat, shrink session,
+  reducing image token cost by 96-99%. Use when: (1) user says /shrink, /shrink,
+  shrink images, compress images, reduce context, image bloat, shrink session,
   context too large, (2) session is approaching context limits and contains images,
   (3) user wants to optimize token usage across sessions. Supports single session,
   all sessions, per-agent targeting, dedup detection, cost estimates, and automatic
@@ -47,7 +47,7 @@ When triggered, present an interactive menu using inline buttons (Telegram/Disco
 Run a dry-run first to show the user what's available:
 
 ```bash
-python3 <skill_dir>/scripts/deflate.py --agent <agentId> --dry-run --json
+python3 <skill_dir>/scripts/shrink.py --agent <agentId> --dry-run --json
 ```
 
 Parse the JSON output and present:
@@ -62,7 +62,7 @@ Parse the JSON output and present:
 ```
 
 Then offer buttons:
-- **🚀 Deflate Now** → run without --dry-run
+- **🚀 Shrink Now** → run without --dry-run
 - **🔎 Details** → show per-image breakdown from the dry-run
 - **⚙️ Options** → show configurable settings
 
@@ -70,11 +70,11 @@ If no images found: "✅ No unprocessed images found. Session is already optimiz
 
 ### Step 2: Execute
 
-On "Deflate Now", run live and keep the user informed with progress updates.
+On "Shrink Now", run live and keep the user informed with progress updates.
 
 For large runs (10+ images), send a progress message and update it as images complete:
 ```
-🖼️ Deflating Wayne (36 images)...
+🖼️ Shrinking Wayne (36 images)...
 ✅ 1/36 — Quicknode dashboard (23K tokens saved)
 ✅ 2/36 — ♻️ Duplicate (reused)
 ✅ 3/36 — Wagyu portfolio (21K tokens saved)
@@ -82,7 +82,7 @@ For large runs (10+ images), send a progress message and update it as images com
 ```
 
 ```bash
-python3 <skill_dir>/scripts/deflate.py --agent <agentId>
+python3 <skill_dir>/scripts/shrink.py --agent <agentId>
 ```
 
 Report the full summary stats when complete.
@@ -104,9 +104,9 @@ If user chooses "Apply Now", run:
 ```bash
 openclaw gateway restart
 ```
-Then confirm: "✅ Gateway restarted. All agents now running on deflated sessions."
+Then confirm: "✅ Gateway restarted. All agents now running on shrunk sessions."
 
-**Important:** Warn that "Apply Now" causes ~5 seconds of downtime for ALL agents, not just the deflated one.
+**Important:** Warn that "Apply Now" causes ~5 seconds of downtime for ALL agents, not just the shrunk one.
 
 ### Step 3: Options (if requested)
 
@@ -120,12 +120,12 @@ Present buttons:
 - **📊 All Sessions** → `--all-sessions`
 - **🎯 This Session** → single session (default)
 
-## Variant: `/deflate all`
+## Variant: `/shrink all`
 
-When user says "deflate all", "deflate all sessions", or "deflate everything":
+When user says "shrink all", "shrink all sessions", or "shrink everything":
 
 ```bash
-python3 <skill_dir>/scripts/deflate.py --agent <agentId> --all-sessions --dry-run --json
+python3 <skill_dir>/scripts/shrink.py --agent <agentId> --all-sessions --dry-run --json
 ```
 
 Present totals across all sessions, then confirm before running live.
@@ -134,22 +134,22 @@ Present totals across all sessions, then confirm before running live.
 
 ```bash
 # Basic: current session dry-run
-python3 scripts/deflate.py --agent main --dry-run
+python3 scripts/shrink.py --agent main --dry-run
 
-# Live deflate with all defaults
-python3 scripts/deflate.py --agent main
+# Live shrink with all defaults
+python3 scripts/shrink.py --agent main
 
 # All sessions for an agent
-python3 scripts/deflate.py --agent main --all-sessions
+python3 scripts/shrink.py --agent main --all-sessions
 
 # Specific session file
-python3 scripts/deflate.py --session-file path/to/session.jsonl
+python3 scripts/shrink.py --session-file path/to/session.jsonl
 
 # Budget-conscious: limit images and use cheaper model
-python3 scripts/deflate.py --agent main --max-images 5 --model claude-haiku-4-5
+python3 scripts/shrink.py --agent main --max-images 5 --model claude-haiku-4-5
 
 # JSON output for programmatic use
-python3 scripts/deflate.py --agent main --all-sessions --json
+python3 scripts/shrink.py --agent main --all-sessions --json
 ```
 
 ## All Flags
